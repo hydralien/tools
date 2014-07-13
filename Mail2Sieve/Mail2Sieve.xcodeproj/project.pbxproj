@@ -1,0 +1,333 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		75E515F719729FE10051F7A1 /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E515F619729FE10051F7A1 /* Automator.framework */; };
+		75E515F919729FE10051F7A1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E515F819729FE10051F7A1 /* Cocoa.framework */; };
+		75E515FB19729FE10051F7A1 /* AppleScriptObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E515FA19729FE10051F7A1 /* AppleScriptObjC.framework */; };
+		75E5160519729FE10051F7A1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75E5160319729FE10051F7A1 /* InfoPlist.strings */; };
+		75E5160719729FE10051F7A1 /* Mail2Sieve.applescript in Sources */ = {isa = PBXBuildFile; fileRef = 75E5160619729FE10051F7A1 /* Mail2Sieve.applescript */; };
+		75E5160A19729FE10051F7A1 /* main.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75E5160819729FE10051F7A1 /* main.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		75E515F319729FE10051F7A1 /* Mail2Sieve.action */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Mail2Sieve.action; sourceTree = BUILT_PRODUCTS_DIR; };
+		75E515F619729FE10051F7A1 /* Automator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Automator.framework; path = System/Library/Frameworks/Automator.framework; sourceTree = SDKROOT; };
+		75E515F819729FE10051F7A1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		75E515FA19729FE10051F7A1 /* AppleScriptObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppleScriptObjC.framework; path = System/Library/Frameworks/AppleScriptObjC.framework; sourceTree = SDKROOT; };
+		75E515FD19729FE10051F7A1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		75E515FE19729FE10051F7A1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		75E515FF19729FE10051F7A1 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		75E5160219729FE10051F7A1 /* Mail2Sieve-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mail2Sieve-Info.plist"; sourceTree = "<group>"; };
+		75E5160419729FE10051F7A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		75E5160619729FE10051F7A1 /* Mail2Sieve.applescript */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.applescript; path = Mail2Sieve.applescript; sourceTree = "<group>"; };
+		75E5160919729FE10051F7A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/main.xib; sourceTree = "<group>"; };
+		75E5160B19729FE10051F7A1 /* Mail2Sieve-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mail2Sieve-Prefix.pch"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		75E515EF19729FE10051F7A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75E515F919729FE10051F7A1 /* Cocoa.framework in Frameworks */,
+				75E515FB19729FE10051F7A1 /* AppleScriptObjC.framework in Frameworks */,
+				75E515F719729FE10051F7A1 /* Automator.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		75E515E919729FE10051F7A1 = {
+			isa = PBXGroup;
+			children = (
+				75E5160019729FE10051F7A1 /* Mail2Sieve */,
+				75E515F519729FE10051F7A1 /* Frameworks */,
+				75E515F419729FE10051F7A1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		75E515F419729FE10051F7A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				75E515F319729FE10051F7A1 /* Mail2Sieve.action */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		75E515F519729FE10051F7A1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75E515F619729FE10051F7A1 /* Automator.framework */,
+				75E515F819729FE10051F7A1 /* Cocoa.framework */,
+				75E515FA19729FE10051F7A1 /* AppleScriptObjC.framework */,
+				75E515FC19729FE10051F7A1 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		75E515FC19729FE10051F7A1 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75E515FD19729FE10051F7A1 /* Foundation.framework */,
+				75E515FE19729FE10051F7A1 /* CoreData.framework */,
+				75E515FF19729FE10051F7A1 /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		75E5160019729FE10051F7A1 /* Mail2Sieve */ = {
+			isa = PBXGroup;
+			children = (
+				75E5160619729FE10051F7A1 /* Mail2Sieve.applescript */,
+				75E5160819729FE10051F7A1 /* main.xib */,
+				75E5160119729FE10051F7A1 /* Supporting Files */,
+			);
+			path = Mail2Sieve;
+			sourceTree = "<group>";
+		};
+		75E5160119729FE10051F7A1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				75E5160219729FE10051F7A1 /* Mail2Sieve-Info.plist */,
+				75E5160319729FE10051F7A1 /* InfoPlist.strings */,
+				75E5160B19729FE10051F7A1 /* Mail2Sieve-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		75E515F219729FE10051F7A1 /* Mail2Sieve */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75E5160E19729FE10051F7A1 /* Build configuration list for PBXNativeTarget "Mail2Sieve" */;
+			buildPhases = (
+				75E515EE19729FE10051F7A1 /* Sources */,
+				75E515EF19729FE10051F7A1 /* Frameworks */,
+				75E515F019729FE10051F7A1 /* Resources */,
+				75E515F119729FE10051F7A1 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Mail2Sieve;
+			productName = Mail2Sieve;
+			productReference = 75E515F319729FE10051F7A1 /* Mail2Sieve.action */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		75E515EA19729FE10051F7A1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "___FULLUSERNAME___";
+			};
+			buildConfigurationList = 75E515ED19729FE10051F7A1 /* Build configuration list for PBXProject "Mail2Sieve" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 75E515E919729FE10051F7A1;
+			productRefGroup = 75E515F419729FE10051F7A1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				75E515F219729FE10051F7A1 /* Mail2Sieve */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		75E515F019729FE10051F7A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75E5160A19729FE10051F7A1 /* main.xib in Resources */,
+				75E5160519729FE10051F7A1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		75E515F119729FE10051F7A1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "amlint \"${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		75E515EE19729FE10051F7A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75E5160719729FE10051F7A1 /* Mail2Sieve.applescript in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		75E5160319729FE10051F7A1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				75E5160419729FE10051F7A1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		75E5160819729FE10051F7A1 /* main.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				75E5160919729FE10051F7A1 /* Base */,
+			);
+			name = main.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		75E5160C19729FE10051F7A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		75E5160D19729FE10051F7A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		75E5160F19729FE10051F7A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mail2Sieve/Mail2Sieve-Prefix.pch";
+				INFOPLIST_FILE = "Mail2Sieve/Mail2Sieve-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Automator";
+				OTHER_OSAFLAGS = "-x -t 0 -c 0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = action;
+			};
+			name = Debug;
+		};
+		75E5161019729FE10051F7A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mail2Sieve/Mail2Sieve-Prefix.pch";
+				INFOPLIST_FILE = "Mail2Sieve/Mail2Sieve-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Automator";
+				OTHER_OSAFLAGS = "-x -t 0 -c 0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = action;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		75E515ED19729FE10051F7A1 /* Build configuration list for PBXProject "Mail2Sieve" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75E5160C19729FE10051F7A1 /* Debug */,
+				75E5160D19729FE10051F7A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		75E5160E19729FE10051F7A1 /* Build configuration list for PBXNativeTarget "Mail2Sieve" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75E5160F19729FE10051F7A1 /* Debug */,
+				75E5161019729FE10051F7A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 75E515EA19729FE10051F7A1 /* Project object */;
+}
