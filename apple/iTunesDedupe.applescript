@@ -1,4 +1,4 @@
-tell application "iTunes"
+﻿tell application "iTunes"
 	display dialog "Gimme playlist name" default answer ""
 	set plName to the text returned of the result
 	set curPl to user playlist plName -- current playlist
