@@ -1,3 +1,5 @@
+# there's an online validation form at http://libsieve-php.sourceforge.net/
+
 set my text item delimiters to " "
 set resultRules to {"require [\"fileinto\"];"}
 tell application "Mail"
