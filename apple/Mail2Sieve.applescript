@@ -14,6 +14,7 @@ tell application "Mail"
 				set end of resultRules to "if allof("
 			end if
 			
+			set ruleCollection to {}
 			set ruleConditions to rule conditions of theRule
 			repeat with ruleCond in ruleConditions
 				set ruleType to rule type of ruleCond
@@ -43,8 +44,11 @@ tell application "Mail"
 				else
 					set end of ruleLine to ":is" & headerName & "[\"\"]"
 				end if
-				set end of resultRules to ruleLine as string
+				set end of ruleCollection to ruleLine as string
 			end repeat
+			set my text item delimiters to ",\n"
+			set end of resultRules to ruleCollection as string
+			set my text item delimiters to " "
 			
 			set end of resultRules to ")"
 			set end of resultRules to "{"
@@ -59,7 +63,7 @@ tell application "Mail"
 				end repeat
 				set beginning of movePath to "INBOX"
 				set my text item delimiters to "."
-				set end of resultRules to "fileinto " & (movePath as string) & ";"
+				set end of resultRules to "fileinto \"" & (movePath as string) & "\";"
 				set my text item delimiters to " "
 			end if
 			
