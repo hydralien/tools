@@ -1,4 +1,9 @@
-# there's an online validation form at http://libsieve-php.sourceforge.net/
+# What's this? It's a script that goes through all Apple Mail filters and converts them to Sieve filters, so you could go server-side on email filtering
+# Why? Because I'm lazy - I've accumulated a fair bunch of Apple Mail filters along the way, and converting them manually wasn't much fun. And I found no working option to convert it on the Internet.
+# NOTE: this is validated with a quite limited use case - in my filters, I mostly match against subject and sometimes against CC/To, so it definitely has some issues with other fields. Please review / try loading the results first and don't disable all your Mail filters right away.
+# Exporting filters: just run the script - it will ask you if you want to use disabled filters as active (useful to re-export after you have already disabled Mail filters), then if you want to disable Mail filters (useful when you're certain in your Sieve filterset), and then where to save the results.
+# Also, there's an online validation form at http://libsieve-php.sourceforge.net/
+
 set useDisabledQuestion to display dialog "Do you want to use disabled filters as enabled?" buttons {"Yes", "No"} default button 2
 set useDisabledAnswer to button returned of useDisabledQuestion
 
