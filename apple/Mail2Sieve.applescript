@@ -10,10 +10,11 @@ set useDisabledAnswer to button returned of useDisabledQuestion
 set disableQuestion to display dialog "Should the script disable you filters after export? Useful if you are certain in result to stop Mail from filtering mail." buttons {"Yes", "No"} default button 2
 set disableAnswer to button returned of disableQuestion
 
-set stopQuestion to display dialog "How about stop processing rules when message is *moved* from Inbox? my Mail filters had no \"stop evaluating rules\" flag, because message is not processed im Mail after it moved away - it's different in Sieve, you need to stop processing explicitly.\nSounds good?" buttons {"Yes", "No"} default button 2
+set stopQuestion to display dialog "How about stop processing rules when message is *moved* from Inbox? my Mail filters had no \"stop evaluating rules\" flag, because message is not processed im Mail after it moved away - it's different in Sieve, you need to stop processing explicitly.
+Sounds good?" buttons {"Yes", "No"} default button 2
 set stopAnswer to button returned of stopQuestion
 
-
+# delimiter is used when "joining" arrays with "É as string" statement
 set my text item delimiters to " "
 set resultRules to {"require [\"fileinto\",\"copy\",\"body\"];"}
 tell application "Mail"
@@ -22,6 +23,7 @@ tell application "Mail"
 	set ruleSet to rules
 	repeat with theRule in ruleSet
 		set filterDisabled to ""
+		# add rule as disabled
 		if enabled of theRule = false and useDisabledAnswer is equal to "No" then
 			set filterDisabled to "false #"
 		end if
@@ -30,7 +32,9 @@ tell application "Mail"
 		set prefix to "
 "
 		set currentRule to {}
+		#set rule name
 		set end of currentRule to "# rule:[" & name of theRule & "]"
+		# choose all/any condition
 		if all conditions must be met of theRule = true then
 			set end of currentRule to "if " & filterDisabled & "allof("
 		else
@@ -39,6 +43,8 @@ tell application "Mail"
 		
 		set ruleCollection to {}
 		set ruleConditions to rule conditions of theRule
+
+		# list all conditions rule should match to execute
 		repeat with ruleCond in ruleConditions
 			set ruleType to rule type of ruleCond
 			set ruleQ to qualifier of ruleCond
@@ -94,6 +100,7 @@ tell application "Mail"
 		set end of currentRule to ")"
 		set end of currentRule to "{"
 		
+		# add action to move message
 		set moveTo to (move message of theRule)
 		if should move message of theRule = true then
 			# set end of currentRule to "discard;"
@@ -108,6 +115,7 @@ tell application "Mail"
 			set my text item delimiters to " "
 		end if
 		
+		# action to copy the message
 		set copyTo to (copy message of theRule)
 		if should copy message of theRule = true then
 			set copyPath to {}
@@ -121,10 +129,12 @@ tell application "Mail"
 			set my text item delimiters to " "
 		end if
 		
+		# discarding the message
 		if delete message of theRule = true then
 			set end of currentRule to "discard;"
 		end if
 		
+		# stop with rules if requested or specified
 		if stop evaluating rules of theRule = true or (should move message of theRule = true and stopAnswer = "Yes") then
 			set end of currentRule to "stop;"
 		end if
@@ -136,6 +146,7 @@ tell application "Mail"
 		
 		set end of resultRules to prefix & currentRule as string
 		
+		# disable rules on Mail side on request
 		if disableAnswer is equal to "Yes" then
 			set enabled of theRule to false
 		end if
@@ -145,11 +156,12 @@ tell application "Mail"
 	resultRules
 end tell
 
-
+# join all lines to a single string by a newline
 set my text item delimiters to "
 "
 set resultString to resultRules as string
 
+# file saving dialogue and other file saving procedures
 set my text item delimiters to ""
 set resultFileName to (choose file name with prompt "Save Rules to file" default name "mail_rules_sieve_export.txt" default location path to desktop) as text
 if resultFileName does not end with ".txt" then set resultFile to resultFile & ".txt"
