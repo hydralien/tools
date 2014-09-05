@@ -2,13 +2,17 @@
 # Why? Because I'm lazy - I've accumulated a fair bunch of Apple Mail filters along the way, and converting them manually wasn't much fun. And I found no working option to convert it on the Internet.
 # NOTE: this is validated with a quite limited use case - in my filters, I mostly match against subject and sometimes against CC/To, so it definitely has some issues with other fields. Please review / try loading the results first and don't disable all your Mail filters right away.
 # Exporting filters: just run the script - it will ask you if you want to use disabled filters as active (useful to re-export after you have already disabled Mail filters), then if you want to disable Mail filters (useful when you're certain in your Sieve filterset), and then where to save the results.
-# Also, there's an online validation form at http://libsieve-php.sourceforge.net/
+# Also, there's an online validation form at http://libsieve-php.sourceforge.net/ - but the best way to validate something works is to put it to where it's about to be used (provided that place gives you enough feedback if something goes off)
 
-set useDisabledQuestion to display dialog "Do you want to use disabled filters as enabled?" buttons {"Yes", "No"} default button 2
+set useDisabledQuestion to display dialog "Do you want to use disabled filters as enabled? Useful when you do export after having filters disabled." buttons {"Yes", "No"} default button 2
 set useDisabledAnswer to button returned of useDisabledQuestion
 
-set disableQuestion to display dialog "Do you want to disable you filters after export?" buttons {"Yes", "No"} default button 2
+set disableQuestion to display dialog "Should the script disable you filters after export? Useful if you are certain in result to stop Mail from filtering mail." buttons {"Yes", "No"} default button 2
 set disableAnswer to button returned of disableQuestion
+
+set stopQuestion to display dialog "How about stop processing rules when message is *moved* from Inbox? my Mail filters had no \"stop evaluating rules\" flag, because message is not processed im Mail after it moved away - it's different in Sieve, you need to stop processing explicitly.\nSounds good?" buttons {"Yes", "No"} default button 2
+set stopAnswer to button returned of stopQuestion
+
 
 set my text item delimiters to " "
 set resultRules to {"require [\"fileinto\",\"copy\",\"body\"];"}
@@ -121,7 +125,7 @@ tell application "Mail"
 			set end of currentRule to "discard;"
 		end if
 		
-		if stop evaluating rules of theRule = true then
+		if stop evaluating rules of theRule = true or (should move message of theRule = true and stopAnswer = "Yes") then
 			set end of currentRule to "stop;"
 		end if
 		
