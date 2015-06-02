@@ -43,7 +43,7 @@ tell application "Mail"
 		
 		set ruleCollection to {}
 		set ruleConditions to rule conditions of theRule
-
+		
 		# list all conditions rule should match to execute
 		repeat with ruleCond in ruleConditions
 			set ruleType to rule type of ruleCond
