@@ -1,0 +1,14 @@
+clause="$1"
+files="$2"
+location="$3"
+
+if [[ -z "$files" ]]
+then
+        files="*"
+fi
+if [[ -z "$location" ]]
+then
+        location="."
+fi
+
+find "$location" -iname "$files" | xargs grep -E "$clause"

@@ -1,0 +1,32 @@
+roles=$*
+prefix=""
+synctime=15
+myhost=`hostname`
+
+if [[ $myhost == *booking.com* ]]
+then
+   prefix='bash -c'
+else
+   prefix='ssh cron-staging.prod.booking.com PERL5LIB=/usr/local/git_tree/main/lib'
+fi
+
+if [ "$roles" ]
+then
+    sqlroles=`echo "\"$roles\""|sed "s/ /\",\"/g"`
+    echo "Selected roles status ($sqlroles):"
+    $prefix "mysqly sysctl -e 'select server_role, repository, last_sync, locked, blocked from deploy where server_role in ($sqlroles)'" 2>/dev/null
+    echo
+    exit 0
+fi
+
+echo "Roles being synced:"
+$prefix "mysqly sysctl -e 'select server_role, repository, last_sync from deploy where syncing=1'" 2>/dev/null
+echo
+
+echo "Recently synced roles (within $synctime minutes):"
+$prefix "mysqly sysctl -e 'select server_role, repository, last_sync from deploy where syncing=0 and last_sync > SUBTIME(now(), \"0 0:$synctime:0\") order by last_sync desc'" 2>/dev/null
+echo
+
+echo "Locked-Blocked:"
+$prefix "mysqly sysctl -e 'select server_role, repository, last_sync, locked, blocked from deploy where locked=1 or blocked=1'" 2>/dev/null
+echo

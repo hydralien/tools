@@ -1,0 +1,25 @@
+search="$1"
+env="$2"
+dc="$3"
+if [ -z "$search" ] || [ "$search" == "-h" ] || [ "$search" == "--help" ]
+then
+    echo "Usage (default dc is lhr4): hostsearch <seachphrase> [env (prod,corp,dqs) default prod [dc (lhr4,ams4,...) default lhr4] ]"
+    exit
+fi
+if [ -z "$dc" ]
+then
+    dc="lhr4"
+fi
+if [ -z "$env" ]
+then
+    env="prod"
+fi
+
+prefix="ssh $USER.shell.booking.com"
+host=`hostname`
+if [[ $host == *booking.com* ]]
+then
+    prefix=""
+fi
+
+$prefix host -t any -l $dc.$env.booking.com|grep -E "$search.*address"

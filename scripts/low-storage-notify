@@ -1,0 +1,2 @@
+#!/bin/bash
+df -hl |grep -Eo '[0-9]+%' | bash -c 'read pct; ipct=`echo $pct|cut -d% -f1`; echo "$ipct%"; if [[ $ipct -gt 90 ]]; then echo "detected high space usage - $ipct%"; df -hl|cat -|mail -r "spacewatch@`hostname`" -s "Free space running low on `hostname`" "boris.turchik@booking.com"; fi'

@@ -1,0 +1,24 @@
+roles=$*
+gitroot="/usr/local/git_tree/main"
+sshopts="-o StrictHostKeyChecking=no"
+myhost=`hostname`
+if [[ $myhost == *booking.com* ]]
+then
+   sshopts="-o StrictHostKeyChecking=no -o ProxyCommand='ssh shell-201.lhr4.corp.booking.com nc %h %p'"
+fi
+
+if [ -z "$roles" ]
+then
+   if [[ $myhost == *booking.com* ]]
+   then
+       roles=`mysqly sysctl -B -e 'select distinct server_role from deploy 2>/dev/null'|tr '\n' ' '`
+   else
+       roles=`ssh cron-staging.prod.booking.com PERL5LIB=/usr/local/git_tree/main/lib "mysqly sysctl -B -e 'select distinct server_role from deploy 2>/dev/null'" | tr '\n' ' '`
+   fi
+fi
+
+for role in $roles
+do
+    hostname="$role-staging.prod.booking.com"
+    host "$hostname">/dev/null && printf "\n$hostname ($role):\n" && ssh $sshopts "$hostname" "cd $gitroot && umask 0002 && git-deploy status 2>&1" 2>/dev/null
+done
