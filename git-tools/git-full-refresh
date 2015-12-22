@@ -1,0 +1,1 @@
+git forget . ; devctl git-pull ; devctl restart

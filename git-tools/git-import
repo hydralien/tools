@@ -1,0 +1,1 @@
+curdir=`pwd`; ssh $1 "cd $curdir ; git diff"|git apply -

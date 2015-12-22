@@ -1,1 +1,15 @@
-git forget . ; devctl git-pull ; devctl restart
+if [[ $1 == "-f" ]]
+then
+        git forget .
+        git pull
+else
+        stashed=`git stash`
+        echo $stashed
+        git pull
+        if [[ $stashed != *"No local changes to save"* ]]
+        then
+                git stash apply
+        fi
+fi
+devctl restart
+
