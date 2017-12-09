@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ls -l $@ 
+=======
+ls -lh $@
+>>>>>>> git tools update
