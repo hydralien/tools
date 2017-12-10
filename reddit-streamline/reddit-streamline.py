@@ -26,6 +26,18 @@ class fakeNode:
         return {}
     def set(self, var, val):
         return True
+
+def hop_by_hop_headers():
+    return {
+        'connection' : 1,
+        'keep-alive' : 1,
+        'proxy-authenticate' : 1,
+        'proxy-authorization' : 1,
+        'te' : 1,
+        'trailers' : 1,
+        'transfer-encoding' : 1,
+        'upgrade' : 1
+    }
     
 def parse_xml(filename="", content=""):
     rss_root = None
@@ -39,7 +51,6 @@ def parse_xml(filename="", content=""):
 
     self_links = rss_root.findall('ns:link', ns)
     for self_link in self_links:
-        print self_link
         if 'rel' not in self_link.attrib or self_link.attrib['rel'] != 'self':
             continue
         self_link.set("href", request.url)
@@ -81,9 +92,20 @@ def direddit(rss_path=""):
     rss_response = urllib2.urlopen(rss_request)
     rss_xml = rss_response.read()
 
+    hop_headers = hop_by_hop_headers()
+    rss_headers = rss_response.info()
+    for header_name in rss_headers:
+        if header_name.lower() in hop_headers:
+            continue
+        response.set_header(header_name, rss_headers[ header_name ])
+
     response.content_type = 'application/atom+xml; charset=UTF-8'
     
-    return parse_xml(content=rss_xml)
+    rss_converted_xml = parse_xml(content=rss_xml)
+
+    response.set_header("Content-Length", len(rss_converted_xml))
+
+    return rss_converted_xml
 
 def log_request():
     headers = ""
