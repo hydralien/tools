@@ -6,6 +6,14 @@ import urllib
 import urllib2
 import re
 import xml.etree.ElementTree as ET
+import logging
+
+logger = logging.getLogger('rss_application')
+logger.setLevel(logging.DEBUG)
+
+fh = logging.FileHandler('rss.log')
+fh.setLevel(logging.DEBUG)
+logger.addHandler(fh)
 
 home = os.path.dirname(os.path.realpath(__file__))
 sys.path += [home + '/lib/python-packages']
@@ -16,6 +24,8 @@ class fakeNode:
     text = ""
     def attrib():
         return {}
+    def set(self, var, val):
+        return True
     
 def parse_xml(filename="", content=""):
     rss_root = None
@@ -27,6 +37,13 @@ def parse_xml(filename="", content=""):
 
     ns = {'ns' : 'http://www.w3.org/2005/Atom'}
 
+    self_links = rss_root.findall('ns:link', ns)
+    for self_link in self_links:
+        print self_link
+        if 'rel' not in self_link.attrib or self_link.attrib['rel'] != 'self':
+            continue
+        self_link.set("href", request.url)
+    
     for entry in rss_root.findall('ns:entry', ns):
         entry_link = fakeNode()
         entry_content = fakeNode()
@@ -53,13 +70,12 @@ def diredditfile():
     response.content_type = 'application/atom+xml; charset=UTF-8'
     return parse_xml(home + "/rss.xml")
 
-@route('/direddit')
-def direddit():
-    rss_url = request.query.rss_url
+@route('/direddit/<rss_path:path>')
+def direddit(rss_path=""):
+    rss_url = "https://reddit.com/" + rss_path
 
-    if 'reddit' not in rss_url:
-        return "Unsupported RSS"
-
+    log_request()
+    
     clean_url = urllib.unquote(rss_url)
     rss_request = urllib2.Request(clean_url, None, {'User-Agent' : 'I am a strange loop'})
     rss_response = urllib2.urlopen(rss_request)
@@ -68,7 +84,16 @@ def direddit():
     response.content_type = 'application/atom+xml; charset=UTF-8'
     
     return parse_xml(content=rss_xml)
-    
+
+def log_request():
+    headers = ""
+    for header in request.headers:
+        hvalue = request.headers.get(header)
+        headers += header + ": " + hvalue + "; "
+    log_line = request.path + " -> " + request.query_string + " / " + headers
+    logger.info(log_line)
+
+    return log_line
 
 @route('/drink/:name')
 def drink(name='Alice'):
@@ -85,7 +110,11 @@ def reqdump():
 
 debug(True)
 if sys.stdin.isatty():
-    run(host='localhost', reloader=True, port=8080)
+    try:
+        run(reloader=True)
+    except (KeyboardInterrupt, SystemExit):
+        sys.stderr.close()
+        quit()
 else:
     run(server='cgi')
 
