@@ -85,7 +85,7 @@ def diredditfile():
 def direddit(rss_path=""):
     rss_url = "https://reddit.com/" + rss_path
 
-    log_request()
+    #log_request()
     
     clean_url = urllib.unquote(rss_url)
     rss_request = urllib2.Request(clean_url, None, {'User-Agent' : 'I am a strange loop'})

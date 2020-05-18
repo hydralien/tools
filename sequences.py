@@ -2,51 +2,54 @@ from getopt import getopt
 import sys
 import re
 
-# Params:
-# -s <match> - start match, dump starts if found, multiple occurrences allowed.
-# -e <match> - end match, dump ends if found, multiple occurrences allowed.
-# -f - voluntary option to force (allow) empty start and/or end 
-# -p - optional separator for found cases
-# -b <n> - optional number of lines to print before start match
-# -a <n> - optional number of lines to print after end match
-# -r - optionally treat match as regexps
-# -u - optionally output unique sequences only (BEWARE or memory usage)
-# -c - optional flag to provide counts of unique sequences match (works with -u only)
+import argparse
 
-unique_key = '' 
+unique_key = ''
+parser=argparse.ArgumentParser(
+    description="Parser for the text data to extract portions of data.",
+    usage='%(prog)s [options]'
+)
+parser.add_argument('-s',  action="store", dest="start", nargs="+", help="start match, dump starts if found, multiple occurrences allowed")
+parser.add_argument('-e',  action="store", dest="end",   nargs="+", help="end match, dump ends if found, multiple occurrences allowed")
+parser.add_argument('-p',  action="store", dest="separate", nargs="+", help="optional separator for found cases")
+parser.add_argument('-b',  action="store", dest="before", type=int, help="optional number of lines to print before start match")
+parser.add_argument('-a',  action="store", dest="after", type=int, help="optional number of lines to print after start match")
+parser.add_argument('-f',  dest="force", action='store_true', help="voluntary option to force (allow) empty start and/or end")
+parser.add_argument('-r',  dest="regexp", action='store_true', help="optionally treat match as regexps")
+parser.add_argument('-u',  dest="unique", action='store_true', help="optionally output unique sequences only (BEWARE or memory usage)")
+parser.add_argument('-c',  dest="count", action='store_true', help="optional flag to provide counts of unique sequences match (works with -u only)")
 
 def main(argv):
-    opts, args = getopt(argv, 's:e:fs:b:a:p:ruc')
-    force = []
+    args = parser.parse_args()
+
+    force = False
     starts = []
     ends = []
     separator = []
-    before = []
-    after = []
-    regexp = []
-    unique = []
-    count = []
-    for (param, param_value) in opts:
-        {
-            '-s' : lambda val: starts.append(val),
-            '-e' : lambda val: ends.append(val),
-            '-f' : lambda val: force.append(True),
-            '-p' : lambda val: separator.append(val),
-            '-b' : lambda val: before.append(val),
-            '-a' : lambda val: after.append(val),
-            '-r' : lambda val: regexp.append(True),
-            '-u' : lambda val: unique.append(True),
-            '-c' : lambda val: count.append(True),
-        }.get(param)(param_value)
-    before = int(before.pop()) if before else 0
-    after = int(after.pop()) if after else 0
+    before = 0
+    after = 0
+    regexp = False
+    unique = False
+    count = False
+
+    print(args)
+
+    if args.start: starts.extend(args.start)
+    if args.end: ends.extend(args.end)
+    if args.separate: separator.extend(args.separate)
+    if args.force: force = args.force
+    if args.before: before = args.before
+    if args.after: after = args.after
+    if args.regexp: regexp = args.regexp
+    if args.count: count = args.count
+    if args.unique: unique = args.unique
 
     if not starts and not force:
-        print "If start clause(s) '-s match' are omitted, output starts right away. Use -f to confirm."
+        print("If start clause(s) '-s match' are omitted, output starts right away. Use -f to confirm.")
         sys.exit(1)
 
     if not ends and not force:
-        print "If end clause(s) '-e match' are omitted, output (once starts) goes till the end of input. Use -f to confirm."
+        print("If end clause(s) '-e match' are omitted, output (once starts) goes till the end of input. Use -f to confirm.")
         sys.exit(1)
 
     before_lines = []
