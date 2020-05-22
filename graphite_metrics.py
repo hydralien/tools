@@ -1,9 +1,9 @@
 import urllib2
 import json
 
-metricSearch = 'https://graphite.booking.com/metrics/find/?format=completer&automatic_variants=1&query='
-searchClause = "pageview"
-roleName = "*hmsapp*"
+metricSearch = 'https://graphite.yourserver.com/metrics/find/?format=completer&automatic_variants=1&query='
+searchClause = "metric_name"
+pathName = "*pathpart*"
 
 def getMetrics(path=''):
     result = urllib2.urlopen(metricSearch + path);
@@ -31,15 +31,15 @@ def collectMetrics(rootPath, searchTerm, pathDepth):
     return resultMetrics
 
 
-roleMetrics = collectMetrics('', roleName, 0)
+pathMetrics = collectMetrics('', pathName, 0)
 
-for metric in roleMetrics:
+for metric in pathMetrics:
     print "{depth}: {path}".format(depth=metric['depth'], path=metric['path'])
     continue
     if metric['is_leaf'] == "1":
         if searchClause in metric['path']:
             print metric['path']
         continue
-    roleSearch = collectMetrics(metric['path'], '*{}*'.format(searchClause), metric['depth'])
-    for found in roleSearch:
+    pathSearch = collectMetrics(metric['path'], '*{}*'.format(searchClause), metric['depth'])
+    for found in pathSearch:
         print found['path']

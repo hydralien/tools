@@ -6,7 +6,7 @@ for f in $( git diff --cached --name-status|awk '$1 != "R" { print $2 }' ); do
   filename=$(basename "$f")
   extension="${filename##*.}"
   if [ "$extension" = "pl" ] || [ "$extension" = "pm" ]; then
-      booking-perl -c $f
+      perl -c $f
       lineretcode=$?
       if [ $lineretcode != 0 ]; then
           retcode=$lineretcode
