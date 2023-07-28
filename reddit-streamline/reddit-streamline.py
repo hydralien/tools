@@ -73,13 +73,8 @@ def parse_xml(filename="", content=""):
     return xml_string.replace("ns0:", "").replace(":ns0", "")
 
 @route('/')
-def index(stuff='Amy'):
-    return template('Cosy! Try  <a href="drink/{{stuff}}">drinking</a> at {{home}}', stuff=stuff, home=home)
-
-@route('/diredditfile')
-def diredditfile():
-    response.content_type = 'application/atom+xml; charset=UTF-8'
-    return parse_xml(home + "/rss.xml")
+def index():
+    return template('Try adding Reddit feed path to the URL, e.g.  <a href="direddit/r/programming/.rss">/direddit/r/programming/.rss</a>')
 
 @route('/direddit/<rss_path:path>')
 def direddit(rss_path=""):
@@ -115,23 +110,9 @@ def log_request():
     log_line = request.path + " -> " + request.query_string + " / " + headers
     logger.info(log_line)
 
-    return log_line
 
-@route('/drink/:name')
-def drink(name='Alice'):
-    return template('<b>Drink me {{name}}</b>! Aww...', name=name)
-
-@route('/reqdump')
-def reqdump():
-    data = "<html><body><pre>\n"
-    for header in request.headers:
-        data += "{}:{}<br/>\n".format(header, request.headers.get(header))
-    data += "</pre></body></html>"
-
-    return data
-
-debug(True)
 if sys.stdin.isatty():
+    debug(True)
     try:
         run(reloader=True)
     except (KeyboardInterrupt, SystemExit):
