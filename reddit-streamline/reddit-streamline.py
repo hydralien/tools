@@ -74,7 +74,7 @@ def parse_xml(filename="", content=""):
 
 @route('/')
 def index():
-    return template('Try adding Reddit feed path to the URL, e.g.  <a href="direddit/r/programming/.rss">/direddit/r/programming/.rss</a>')
+    return template('Try adding "direddit/" + Reddit feed path to the URL, e.g.  <a href="direddit/r/programming/.rss">/direddit/r/programming/.rss</a>')
 
 @route('/direddit/<rss_path:path>')
 def direddit(rss_path=""):
