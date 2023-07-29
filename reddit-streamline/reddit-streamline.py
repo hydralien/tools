@@ -1,9 +1,9 @@
-#!/usr/local/bin/python2.7
+#!/usr/local/bin/python3
 
 import sys
 import os
 import urllib
-import urllib2
+import urllib.request
 import re
 import xml.etree.ElementTree as ET
 import logging
@@ -69,22 +69,20 @@ def parse_xml(filename="", content=""):
             if 'reddit' not in content_url:
                 entry_link.set('href', content_url)
                                
-    xml_string = ET.tostring( rss_root, encoding="UTF-8" )
-    return xml_string.replace("ns0:", "").replace(":ns0", "")
+    xml_string = str(ET.tostring( rss_root, encoding="UTF-8" )).replace("ns0:", "").replace(":ns0", "")
+    return xml_string
 
 @route('/')
 def index():
-    return template('Try adding "direddit/" + Reddit feed path to the URL, e.g.  <a href="direddit/r/programming/.rss">/direddit/r/programming/.rss</a>')
+    return 'Try adding "direddit/" + Reddit feed path to the URL, e.g.  <a href="direddit/r/programming/.rss">/direddit/r/programming/.rss</a>'
 
 @route('/direddit/<rss_path:path>')
 def direddit(rss_path=""):
     rss_url = "https://reddit.com/" + rss_path
 
-    #log_request()
-    
-    clean_url = urllib.unquote(rss_url)
-    rss_request = urllib2.Request(clean_url, None, {'User-Agent' : 'I am a strange loop'})
-    rss_response = urllib2.urlopen(rss_request)
+    clean_url = urllib.parse.unquote(rss_url)
+    rss_request = urllib.request.Request(clean_url, None, {'User-Agent' : 'I am a strange loop'})
+    rss_response = urllib.request.urlopen(rss_request)
     rss_xml = rss_response.read()
 
     hop_headers = hop_by_hop_headers()
