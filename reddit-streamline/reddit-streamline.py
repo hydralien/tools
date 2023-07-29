@@ -69,7 +69,7 @@ def parse_xml(filename="", content=""):
             if 'reddit' not in content_url:
                 entry_link.set('href', content_url)
                                
-    xml_string = str(ET.tostring( rss_root, encoding="UTF-8" )).replace("ns0:", "").replace(":ns0", "")
+    xml_string = ET.tostring( rss_root, encoding="UTF-8" ).decode().replace("ns0:", "").replace(":ns0", "")
     return xml_string
 
 @route('/')
@@ -98,7 +98,7 @@ def direddit(rss_path=""):
 
     response.set_header("Content-Length", len(rss_converted_xml))
 
-    return Response(rss_converted_xml)
+    return rss_converted_xml.encode()
 
 def log_request():
     headers = ""
