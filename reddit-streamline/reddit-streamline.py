@@ -98,7 +98,7 @@ def direddit(rss_path=""):
 
     response.set_header("Content-Length", len(rss_converted_xml))
 
-    return rss_converted_xml
+    return bottle.Response(rss_converted_xml)
 
 def log_request():
     headers = ""
