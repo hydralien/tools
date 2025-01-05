@@ -76,7 +76,7 @@ def parse_xml(filename="", content=""):
 def index():
     return 'Try adding "direddit/" + Reddit feed path to the URL, e.g.  <a href="direddit/r/programming/.rss">/direddit/r/programming/.rss</a>'
 
-@route('/direddit/<rss_path:path>')
+@route('/direddit/<path:rss_path>')
 def direddit(rss_path=""):
     rss_url = "https://reddit.com/" + rss_path
 
